@@ -1,0 +1,30 @@
+{
+  "name": "namastereact-day2",
+  "version": "1.0.0",
+  "description": "Learning Course",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saakshi10/NamasteReact.git"
+  },
+  "author": "Saakshi Singhal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saakshi10/NamasteReact/issues"
+  },
+  "homepage": "https://github.com/saakshi10/NamasteReact#readme",
+  "devDependencies": {
+    "parcel": "^2.8.2",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist": [
+    "defaults"
+  ]
+}

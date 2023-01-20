@@ -5,48 +5,48 @@ Topics: <br />
 4. Behind the Scenes of JSX
 5. Babel & parcel role in JSX
 6. Components
-    - Functional Components
-    - Composing Components
+    a) Functional Components
+        - Composing Components
+    b) Class Based Components
 
-<br /><br /><br />
+<br /><br />
 
 Theory Assignment: <br />
 1. What is JSx?<br />
-Ans: It is an extension of javascript that allows us to write html like syntax in our javascript code. This code is transpiled by bable and converted into React.createElement Which is further converted into DOM 
+It is an extension of javascript that allows us to write html like syntax in our javascript code. This code is transpiled by bable and converted into React.createElement Which is further converted into DOM 
 <br />
+
 2. Super powers of JSX? <br />
-Ans: i. Allows us to write HTML like syntax ii. Converts into React.createElement iii. Do sanitization to prevent XSS attack iv. Allows us to write javascript code inside jsx
+i. allows us to write HTML elements in JavaScript and place them in the DOM without any createElement() and/or appendChild() methods.<br/>
+ii. Code Maintainability <br/>
+iii. Code Readability
+<br/>
 
 3. Role of `type` attribute in script tag? what options can we use there? <br />
-Ans: The HTML <script> type Attribute is used to specify the MIME type of script and identify the content of the Tag. It has a Default value which is “text/javascript”.
-
-    Options we can use: 
-        i. text/javascript (this is default)
-        ii. text/ecmascript
-        iii. application/ecmascript
-        iv. application/javascript
-
+Ans: The HTML <script> type Attribute is used to specify the MIME type of script and identify the content of the Tag. Attribute is not set (default), an empty string, or a JavaScript MIME type (module or importmap)
 <br />
 
 4. {titleComponent} vs {<TitleComponent/>} vs {<TitleComponent></TitleComponent>} in JSX?<br />
-Ans: titleComponent ~ is a React Element
-        <TitleComponent/> and <TitleComponent></TitleComponent> ~ both are React component. First one is used when no the componenent doesn't have any children;
-
+titleComponent ~ is a React Element
+<TitleComponent/> and <TitleComponent></TitleComponent> ~ both are React component. First one is used when no the componenent doesn't have any children.
 <br />
 
-5. Diffing Algorithm
+5. Diffing Algorithm<br />
+https://reactjs.org/docs/reconciliation.html
 
 <br /> <br />
 
 Coding Assignment: <br />
-● Create a nested header element using React.createElement(h1, h2, h3 inside a div with class "title") <br />
+Assignment1 <br />
+    ● Create a nested header element using React.createElement(h1, h2, h3 inside a div with class "title") <br />
     ● Create the same element using JSX <br />
     ● Create a functional component of the same with JSX? <br />
     ● Pass attributes into the tag in JSX <br />
     ● Composition of component(Add a component inside another) <br />
     ● {TitleComponent} vs {<TitleComponent/>} vs {<TitleComponent></TitleComponent>} in JSX ?<br />
 
-● Create a header component from scratch using functional component with JSX <br />
+Assignment2 <br />
+    ● Create a header component from scratch using functional component with JSX <br />
     ● Add a logo in the left <br />
     ● Add a search bar in the middle <br />
     ● Add a user icon on the right <br />

@@ -1,0 +1,38 @@
+body{
+    margin: 0px;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid black;
+    padding: 10px;
+    background-color: bisque;
+}
+
+img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.search-bar{
+    width: 50%;
+    height: 25px;
+    border: 1px solid #00000042;
+    border-radius: 9px;
+    padding: 5px 10px;
+    font-size: 15px;
+    font-style: italic;
+}
+
+input:focus{
+    outline: none !important;
+    border: 2px solid #3c13cf91;
+}
+
+.user-icon{
+    font-size: 25px;
+}

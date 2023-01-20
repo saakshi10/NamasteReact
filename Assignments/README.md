@@ -26,7 +26,7 @@ iii. Code Readability
 Ans: The HTML <script> type Attribute is used to specify the MIME type of script and identify the content of the Tag. Attribute is not set (default), an empty string, or a JavaScript MIME type (module or importmap)
 <br />
 
-4. {titleComponent} vs {<TitleComponent/>} vs {<TitleComponent></TitleComponent>} in JSX?<br />
+4. {titleComponent} vs {`<TitleComponent/>`} vs {`<TitleComponent></TitleComponent>`} in JSX?<br />
 titleComponent ~ is a React Element
 <TitleComponent/> and <TitleComponent></TitleComponent> ~ both are React component. First one is used when no the componenent doesn't have any children.
 <br />
@@ -43,7 +43,7 @@ Assignment1 <br />
     ● Create a functional component of the same with JSX? <br />
     ● Pass attributes into the tag in JSX <br />
     ● Composition of component(Add a component inside another) <br />
-    ● {TitleComponent} vs {<TitleComponent/>} vs {<TitleComponent></TitleComponent>} in JSX ?<br />
+    ● {TitleComponent} vs {`<TitleComponent/>`} vs {`<TitleComponent></TitleComponent>`} in JSX ?<br />
 
 Assignment2 <br />
     ● Create a header component from scratch using functional component with JSX <br />

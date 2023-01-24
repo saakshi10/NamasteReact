@@ -1,38 +1,75 @@
-body{
-    margin: 0px;
-}
-
 .header{
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    border: 1px solid black;
+    margin: 10px;
+}
 
-    border-bottom: 1px solid black;
+.logo{
+    width: 90px;
+    height: 100%;
+}
+
+.nav-items > ul{
+    list-style-type: none;
+    display: flex;
+}
+
+.nav-items > ul > li{
     padding: 10px;
-    background-color: bisque;
 }
 
-img{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+/** RESTAURANT CARD CSS START**/
+
+.card{
+    border: 1px solid black;
+    width: 250px;
+    padding: 10px;
+    margin: 10px;
 }
 
-.search-bar{
-    width: 50%;
-    height: 25px;
-    border: 1px solid #00000042;
-    border-radius: 9px;
-    padding: 5px 10px;
+.card > img{
+    width: 100%;
+}
+
+.card > .name{
+    font-size: 20px;
+    font-weight: 700;
+    word-break: break-word;
+    margin: 7px 0;
+}
+
+.card > .cuisines{
+    color: #686b78;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.card > .details{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.card > .details> .distance{
     font-size: 15px;
-    font-style: italic;
+    text-align: center;
+    margin: auto 0px;
+
 }
 
-input:focus{
-    outline: none !important;
-    border: 2px solid #3c13cf91;
+.card > .details> .rating{
+    color: #fff;
+    background-color: #48c479;
+    padding: 3px 5px;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 2px;
 }
 
-.user-icon{
-    font-size: 25px;
+/** RESTAURANT CARD CSS END **/
+
+.restaurant-list{
+    display: flex;
+    flex-wrap: wrap;
 }

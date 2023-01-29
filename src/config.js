@@ -1,3 +1,10 @@
+// Put all hard coded data into config file
+// Called as constants file in some companies
+// this file could be different for production or staging or testing
+
+export const IMG_CDN_URL =
+    "https://b.zmtcdn.com/web_assets/81f3ff974d82520780078ba1cfbd453a1583259680.png";
+
 export const restaurantList = [
     {
         type: "restaurant",

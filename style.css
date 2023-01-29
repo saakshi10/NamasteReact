@@ -1,8 +1,17 @@
+body{
+    margin: 0px;
+    font-family: cursive;
+
+}
 .header{
-    display: flex;
+    border-bottom: 1px solid #000;
     justify-content: space-between;
-    border: 1px solid black;
-    margin: 10px;
+    display: flex;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    padding-right: 15px;
+    font-family: cursive;
 }
 
 .logo{
@@ -19,10 +28,54 @@
     padding: 10px;
 }
 
-/** RESTAURANT CARD CSS START**/
+.home-page{
+    margin: 15px;
+}
 
+
+.restaurant-list{
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 10px;
+    justify-content: center;
+}
+
+/** SEARCH BAR **/
+.search-container{
+    text-align: end;
+    margin: 5px 10px 15px 0px;
+}
+.search-bar{
+    background-color: #fefafa3d;
+    border: 1px solid #bcc1c7;
+    border-right: none;
+    border-radius: 10px 0px 0px 10px;
+    padding: 10px;
+    font-size: 15px;    
+    width: 40%;
+}
+
+.search-icon {
+    display: inline-block;
+    height: 18px;
+    color: white;
+    background-color: #D9381E;
+    border: 1px solid #D9381E;
+    border-radius: 0px 10px 10px 0px;
+    padding: 10px 15px 10px 12px;
+}
+
+.search-bar:focus{
+    box-shadow: none;
+    outline: none;
+}
+/** SEARCH BAR CSS END **/
+
+
+/** RESTAURANT CARD **/
 .card{
-    border: 1px solid black;
+    border: 1px solid #bcc1c7;
+    border-radius: 2px;
     width: 250px;
     padding: 10px;
     margin: 10px;
@@ -66,10 +119,8 @@
     font-size: 13px;
     border-radius: 2px;
 }
-
 /** RESTAURANT CARD CSS END **/
 
-.restaurant-list{
-    display: flex;
-    flex-wrap: wrap;
-}
+
+
+

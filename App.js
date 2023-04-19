@@ -78,6 +78,9 @@ const jsxHeading = (
  *      a) as HTML Tag <Functional_Component />
  *      b) as JS Function {Functional_Component()}
  * - Any JS code can be written in component within {}
+ * 
+ * COMPONENT COMPOSITION: Component inside a component
+ * ie: Component composition is the name for passing components as props to other components, thus creating new components with other components
  *
  */
 

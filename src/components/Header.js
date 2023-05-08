@@ -1,3 +1,4 @@
+import { useState } from "react";
 import logo from "../../assets/img/logo.jpg";
 
 export const Title = () => {
@@ -8,7 +9,15 @@ export const Title = () => {
     );
 };
 
+function isLoggedIn() {
+    // api call to check authentication
+    // suscess - return true else false
+    return true;
+}
+
 const Header = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     return (
         <div className="header">
             <Title />
@@ -19,6 +28,18 @@ const Header = () => {
                     <li>Contact</li>
                     <li>Cart</li>
                 </ul>
+            </div>
+
+            <div>
+                {isLoggedIn ? (
+                    <button id="login-btn" onClick={() => setIsLoggedIn(false)}>
+                        Logout
+                    </button>
+                ) : (
+                    <button id="logout-btn" onClick={() => setIsLoggedIn(true)}>
+                        Login
+                    </button>
+                )}
             </div>
         </div>
     );

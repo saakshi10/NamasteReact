@@ -1,38 +1,72 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { restaurantList } from "../config";
 import RestaurantCard from "./RestaurantCard";
-import { IMG_CDN_URL } from "../config";
+import Shimmer from "./Shimmer";
 
-/**
- *
- * REACT uses one way data binding
- *
- */
-
+// rerender of component happens when the state variables or the props passed to componenet changes
 const Body = () => {
-    // let searchText = "KFC";      Javascript local variable with default value
+    const [searchText, setSearchText] = useState("");
 
-    /**
-     *
-     * useState HOOK and STATE VARIABLE
-     *     Creating local state variable using useState Hook
-     *     Hook is nothing but a javascript function
-     *     default value of vairable is passed as a parameter to useState Hook
-     *     return type of function is array where:
-     *          - 1st variable is local state variable
-     *          - 2nd variable is the function use to modify the state variable
-     *     cannot modify state variable like we do in JS
-     *
-     *
-     *  This is called two-way binding
-     */
+    // default data to restaurants
+    // const [restaurants, setRestaurants] = useState(restaurantList);
 
-    const [searchText, setSearchText] = useState();
-    // const [searchClicked, setSearchClicked] = useState("false");
+    // empty list of restaurant in initial state for creating shimmer effect
+    const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+    const [allRestaurants, setAllRestaurants] = useState([]);
 
-    const [restaurants, setRestaurants] = useState(restaurantList);
+    // called after react renders the UI
+    // Parameter 1: A callback method which gets called after every re render, where we can write APIs to fetch data after initial page load
+    // Parameter 2: Dependency Array - to stop it from calling again and again on every render pass in a dependency array into it as second parameteres
+    // Dependency arrary => if empty then called only once
+    // if this useEffect is to be called dependent on some variable, like search text, then pass it in the dependency array
+    // ie, dep Array [searchText] => once after initial render + evrytime after re render (when search text changes)
+    // pass multiple values [restaurants, searchText] - fired when either one of the value changes (if both are changing at same time - called only once)
 
-    return (
+    // in the below example, restaurants is mapped with const list from config file, when the page is rendered we see old data of restaurants and then gets replaced by new data
+    useEffect(() => {
+        getRestaurants();
+    }, []);
+
+    async function getRestaurants() {
+        const data = await fetch(
+            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.901701231620061&lng=77.66445640618197&page_type=DESKTOP_WEB_LISTING"
+        );
+        const json = await data.json();
+        // optional chaining
+        setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+
+        // initially set filetred restaurant with all restaurant
+        setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    }
+
+    function filterData(searchText) {
+        if (searchText == "") {
+            return allRestaurants;
+        }
+
+        const data = allRestaurants.filter((restaurant) => {
+            return restaurant.data.name
+                .toLowerCase()
+                .includes(searchText.toLowerCase());
+        });
+
+        return data;
+    }
+
+    // Conditional Rendering
+    // if restaurants list is empty => Shimmer UI
+    // if restaurants list has data => show actual UI
+
+    // Early return - not rendering a component
+    if (!allRestaurants) return null;
+
+    // handle this in a better place
+    // if (filteredRestaurants.length === 0)
+    //     return <h1>No restaurant match your filter</h1>;
+
+    return allRestaurants.length === 0 ? (
+        <Shimmer />
+    ) : (
         <div className="home-page">
             <div className="search-container">
                 <input
@@ -42,57 +76,53 @@ const Body = () => {
                     value={searchText}
                     onChange={(e) => {
                         setSearchText(e.target.value);
+
+                        const data = filterData(e.target.value);
+                        setFilteredRestaurants(data);
                     }}
                 />
                 <i
-                    class="fa-solid fa-magnifying-glass search-icon"
+                    className="fa-solid fa-magnifying-glass search-icon"
                     onClick={() => {
                         const data = filterData(searchText);
-                        setRestaurants(data);
+                        setFilteredRestaurants(data);
                     }}
                 ></i>
-
-                {/* <button
-                    onClick={() => {
-                        // setSearchClicked(
-                        //     searchClicked === "true" ? "false" : "true"
-                        // );
-
-                        // filterData and update restaurant list (via state)
-                        const data = filterData(searchText);
-                        setRestaurants(data);
-                    }}
-                >
-                    Search
-                </button> */}
-                {/* <h1>{searchClicked}</h1> */}
             </div>
             <div className="restaurant-list">
-                {restaurants.map((restaurant) => {
+                {filteredRestaurants.length === 0 ? (
+                    <h1>No Restaurants</h1>
+                ) : (
+                    filteredRestaurants.map((restaurant) => (
+                        <RestaurantCard
+                            key={restaurant.data.id}
+                            {...restaurant.data}
+                        />
+                    ))
+                )}
+
+                {/* 
+                    IMPORTANT NOTE :
+                    ONLY JAVASCRIPT EXPRESSIONS CAN WORK INSIDE THIS RETURN BLOCK
+                    let a = 1;    // its a JS statement not expression
+                    to make it an expression use () brackets
+                */}
+
+                {/* long way to write */}
+                {/* {filteredRestaurants.length == 0 && (
+                    <h1>No matching restaurant found</h1>
+                )}
+                {filteredRestaurants.map((restaurant) => {
                     return (
                         <RestaurantCard
                             key={restaurant.data.id}
                             {...restaurant.data}
                         />
                     );
-                })}
+                })} */}
             </div>
         </div>
     );
 };
-
-function filterData(searchText) {
-    if (searchText == "") {
-        return restaurantList;
-    }
-
-    const data = restaurantList.filter((restaurant) => {
-        return restaurant.data.name
-            .toLowerCase()
-            .includes(searchText.toLowerCase());
-    });
-
-    return data;
-}
 
 export default Body;

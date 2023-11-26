@@ -3,82 +3,47 @@ import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
-
-/**
-   IMPORTS AND EXPORTS
-    A) Default Import
-        - Default import can be renamed
-        import NewHeader from "./components/Header";
-        - Or normally 
-        import Header from "./components/Header";
-
-    B)Named Import
-        - Imported named should not be renamed
-        - import { Title } from "./components/Header";
-
-    WHEN FILE HAS BOTH DEFAULT AND NAMED EXPORTS
-        import Header, { Title } from "./components/Header";
-
-    IMPORTING MULTIPLE EXPORTS
-        import * as Obj from "./components/Header";
-        here we can extract Title from Obj now
-        Title = Obj.Title
-
-    // Files can have extension of jsx, in that case use import like Header.jsx
-
- */
-
-/**
-    Header
-        - Logo
-        - Nav Items (Right Side)
-        - Cart
-
-    Body
-        - Search Bar
-        - Restaurant List
-            - Restaurant Card
-                > Image
-                > Name
-                > Rating
-                > Cusines
-                
-    Footer
-        - Links
-        - Copyright
-        - Facebook / Instagram
-
- */
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import AboutComponent from "./components/About";
+import ErrorComponent from "./components/Error";
+import ContactComponent from "./components/contact";
+import RestaurantMenu from "./components/RestaurantMenu";
 
 const AppLayout = () => {
     return (
         <>
             <Header />
-            <Body />
+            {/* <Body />                // if path is /
+            <AboutComponent />      // if path is /about
+            <ContactComponent />    // if path is /contact */}
+            {/* to do conditional rendering based on router use - Outlet component by react-router-dom */}
+            <Outlet />
             <Footer />
         </>
     );
 };
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout />);
+const appRouter = createBrowserRouter([
+    { path: "/", element: <AppLayout />, errorElement: <ErrorComponent /> },
+    { path: "/about", element: <AboutComponent /> },
+]);
 
-/**
- *
- * INLINE STYLING IN REACT
- *
- */
-const styleObj = {
-    backgroundColor: "yellow",
-};
-const StylingBody = () => {
-    return (
-        <h4
-            style={{
-                backgroundColor: "red",
-            }}
-        >
-            Body With Style
-        </h4>
-    );
-};
+// NESTED ROUTING
+// HEADER and FOOTER intact - change body according to rout
+// Make about page children of AppLayout - children - to create mutliple children of your route
+const nestedAppRouter = createBrowserRouter([
+    {
+        path: "/",
+        element: <AppLayout />,
+        errorElement: <ErrorComponent />,
+        children: [
+            { path: "/", element: <Body /> },
+            { path: "/about", element: <AboutComponent /> },
+            { path: "/contact", element: <ContactComponent /> },
+            { path: "/restaurant/:id", element: <RestaurantMenu /> },
+        ],
+    },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<RouterProvider router={nestedAppRouter} />);

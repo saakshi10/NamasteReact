@@ -21,6 +21,7 @@ const Body = () => {
     // if this useEffect is to be called dependent on some variable, like search text, then pass it in the dependency array
     // ie, dep Array [searchText] => once after initial render + evrytime after re render (when search text changes)
     // pass multiple values [restaurants, searchText] - fired when either one of the value changes (if both are changing at same time - called only once)
+    // if Parameter 2 is not passed, then it means no dependency and thus useeffect will be called after every re render
 
     // in the below example, restaurants is mapped with const list from config file, when the page is rendered we see old data of restaurants and then gets replaced by new data
     useEffect(() => {

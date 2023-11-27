@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { restaurantList } from "../config";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
@@ -33,11 +34,21 @@ const Body = () => {
             "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.901701231620061&lng=77.66445640618197&page_type=DESKTOP_WEB_LISTING"
         );
         const json = await data.json();
+        const restaurant_list_name = "restaurant_grid_listing";
+
+        const restaurantCard = json?.data?.cards.find(
+            (card) => card.card.card.id === restaurant_list_name
+        );
+
         // optional chaining
-        setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+        setAllRestaurants(
+            restaurantCard?.card?.card?.gridElements?.infoWithStyle?.restaurants
+        );
 
         // initially set filetred restaurant with all restaurant
-        setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+        setFilteredRestaurants(
+            restaurantCard?.card?.card?.gridElements?.infoWithStyle?.restaurants
+        );
     }
 
     function filterData(searchText) {
@@ -46,13 +57,15 @@ const Body = () => {
         }
 
         const data = allRestaurants.filter((restaurant) => {
-            return restaurant.data.name
+            return restaurant.info.name
                 .toLowerCase()
                 .includes(searchText.toLowerCase());
         });
 
         return data;
     }
+
+    function goTo() {}
 
     // Conditional Rendering
     // if restaurants list is empty => Shimmer UI
@@ -95,10 +108,12 @@ const Body = () => {
                     <h1>No Restaurants</h1>
                 ) : (
                     filteredRestaurants.map((restaurant) => (
-                        <RestaurantCard
-                            key={restaurant.data.id}
-                            {...restaurant.data}
-                        />
+                        <Link to={"/restaurant/" + restaurant.info.id}>
+                            <RestaurantCard
+                                key={restaurant.info.id}
+                                {...restaurant.info}
+                            />
+                        </Link>
                     ))
                 )}
 
@@ -116,8 +131,8 @@ const Body = () => {
                 {filteredRestaurants.map((restaurant) => {
                     return (
                         <RestaurantCard
-                            key={restaurant.data.id}
-                            {...restaurant.data}
+                            key={restaurant.info.id}
+                            {...restaurant.info}
                         />
                     );
                 })} */}

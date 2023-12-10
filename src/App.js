@@ -8,6 +8,7 @@ import AboutComponent from "./components/About";
 import ErrorComponent from "./components/Error";
 import ContactComponent from "./components/contact";
 import RestaurantMenu from "./components/RestaurantMenu";
+import LoginForm from "./components/LoginForm";
 
 const AppLayout = () => {
     return (
@@ -38,6 +39,7 @@ const nestedAppRouter = createBrowserRouter([
         errorElement: <ErrorComponent />,
         children: [
             { path: "/", element: <Body /> },
+            { path: "/login", element: <LoginForm /> },
             { path: "/about", element: <AboutComponent /> },
             { path: "/contact", element: <ContactComponent /> },
             { path: "/restaurant/:id", element: <RestaurantMenu /> },

@@ -43,9 +43,14 @@ const Header = () => {
                         Logout
                     </button>
                 ) : (
-                    <button id="logout-btn" onClick={() => setIsLoggedIn(true)}>
-                        Login
-                    </button>
+                    <Link to={"/login/"}>
+                        <button
+                            id="logout-btn"
+                            onClick={() => setIsLoggedIn(true)}
+                        >
+                            Login
+                        </button>
+                    </Link>
                 )}
             </div>
         </div>

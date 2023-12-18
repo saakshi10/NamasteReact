@@ -9,6 +9,9 @@ import ErrorComponent from "./components/Error";
 import ContactComponent from "./components/contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import LoginForm from "./components/LoginForm";
+import Profile from "./components/Profile";
+import ProfileClass from "./components/ProfileClass";
+import About from "./components/About";
 
 const AppLayout = () => {
     return (
@@ -26,7 +29,7 @@ const AppLayout = () => {
 
 const appRouter = createBrowserRouter([
     { path: "/", element: <AppLayout />, errorElement: <ErrorComponent /> },
-    { path: "/about", element: <AboutComponent /> },
+    { path: "/about", element: <About /> },
 ]);
 
 // NESTED ROUTING
@@ -40,7 +43,11 @@ const nestedAppRouter = createBrowserRouter([
         children: [
             { path: "/", element: <Body /> },
             { path: "/login", element: <LoginForm /> },
-            { path: "/about", element: <AboutComponent /> },
+            {
+                path: "/about",
+                element: <AboutComponent />,
+                children: [{ path: "profile", element: <ProfileClass /> }],
+            },
             { path: "/contact", element: <ContactComponent /> },
             { path: "/restaurant/:id", element: <RestaurantMenu /> },
         ],

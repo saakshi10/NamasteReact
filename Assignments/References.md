@@ -7,6 +7,5 @@ https://reactrouter.com/en/main
 ## Client Side Routing
 https://reactrouter.com/en/main/start/overview
 
-## Formik
-https://formik.org/
-
+## IMPOERTANT LIFECYCLE FOR REACT
+https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/

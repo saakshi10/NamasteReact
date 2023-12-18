@@ -29,6 +29,21 @@ const Body = () => {
         getRestaurants();
     }, []);
 
+    useEffect(() => {
+        console.log("use effect");
+        const timer = setInterval(() => {
+            console.log("REACT FUNCTION");
+        }, 1000);
+
+        // use can use a return function in use effect, it will be called when componenet will unmount
+        return () => {
+            console.log("use effect return");
+            clearInterval(timer);
+        };
+    }, []);
+
+    console.log("render");
+
     async function getRestaurants() {
         const data = await fetch(
             "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.901701231620061&lng=77.66445640618197&page_type=DESKTOP_WEB_LISTING"

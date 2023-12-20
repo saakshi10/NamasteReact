@@ -1,17 +1,19 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import AboutComponent from "./components/About";
 import ErrorComponent from "./components/Error";
 import ContactComponent from "./components/contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import LoginForm from "./components/LoginForm";
-import Profile from "./components/Profile";
 import ProfileClass from "./components/ProfileClass";
-import About from "./components/About";
+import Shimmer from "./components/Shimmer";
+
+// ALL lazy loaded components should be decared outside the Functional Componenet
+const Instamart = lazy(() => import("./components/instamart"));
+const About = lazy(() => import("./components/About"));
 
 const AppLayout = () => {
     return (
@@ -29,7 +31,6 @@ const AppLayout = () => {
 
 const appRouter = createBrowserRouter([
     { path: "/", element: <AppLayout />, errorElement: <ErrorComponent /> },
-    { path: "/about", element: <About /> },
 ]);
 
 // NESTED ROUTING
@@ -45,11 +46,23 @@ const nestedAppRouter = createBrowserRouter([
             { path: "/login", element: <LoginForm /> },
             {
                 path: "/about",
-                element: <AboutComponent />,
+                element: (
+                    <Suspense fallback={<h1>Loading...</h1>}>
+                        <About />
+                    </Suspense>
+                ),
                 children: [{ path: "profile", element: <ProfileClass /> }],
             },
             { path: "/contact", element: <ContactComponent /> },
             { path: "/restaurant/:id", element: <RestaurantMenu /> },
+            {
+                path: "/instamart",
+                element: (
+                    <Suspense fallback={<Shimmer />}>
+                        <Instamart />
+                    </Suspense>
+                ),
+            },
         ],
     },
 ]);

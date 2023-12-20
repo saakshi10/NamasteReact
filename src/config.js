@@ -5,6 +5,9 @@
 export const IMG_CDN_URL =
     "https://b.zmtcdn.com/web_assets/81f3ff974d82520780078ba1cfbd453a1583259680.png";
 
+export const FETCH_MENU_URL =
+    "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.901701231620061&lng=77.66445640618197&restaurantId=";
+
 export const restaurantList = [
     {
         type: "restaurant",

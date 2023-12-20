@@ -1,48 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { restaurantList } from "../config";
+import useOnline from "../utils/useOnline";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 
 // rerender of component happens when the state variables or the props passed to componenet changes
 const Body = () => {
     const [searchText, setSearchText] = useState("");
-
-    // default data to restaurants
-    // const [restaurants, setRestaurants] = useState(restaurantList);
-
-    // empty list of restaurant in initial state for creating shimmer effect
     const [filteredRestaurants, setFilteredRestaurants] = useState([]);
     const [allRestaurants, setAllRestaurants] = useState([]);
-
-    // called after react renders the UI
-    // Parameter 1: A callback method which gets called after every re render, where we can write APIs to fetch data after initial page load
-    // Parameter 2: Dependency Array - to stop it from calling again and again on every render pass in a dependency array into it as second parameteres
-    // Dependency arrary => if empty then called only once
-    // if this useEffect is to be called dependent on some variable, like search text, then pass it in the dependency array
-    // ie, dep Array [searchText] => once after initial render + evrytime after re render (when search text changes)
-    // pass multiple values [restaurants, searchText] - fired when either one of the value changes (if both are changing at same time - called only once)
-    // if Parameter 2 is not passed, then it means no dependency and thus useeffect will be called after every re render
 
     // in the below example, restaurants is mapped with const list from config file, when the page is rendered we see old data of restaurants and then gets replaced by new data
     useEffect(() => {
         getRestaurants();
     }, []);
-
-    useEffect(() => {
-        console.log("use effect");
-        const timer = setInterval(() => {
-            console.log("REACT FUNCTION");
-        }, 1000);
-
-        // use can use a return function in use effect, it will be called when componenet will unmount
-        return () => {
-            console.log("use effect return");
-            clearInterval(timer);
-        };
-    }, []);
-
-    console.log("render");
 
     async function getRestaurants() {
         const data = await fetch(
@@ -64,6 +36,12 @@ const Body = () => {
         setFilteredRestaurants(
             restaurantCard?.card?.card?.gridElements?.infoWithStyle?.restaurants
         );
+    }
+
+    const isOnline = useOnline();
+
+    if (!isOnline) {
+        return <h1>Offine, please check your internet connection</h1>;
     }
 
     function filterData(searchText) {

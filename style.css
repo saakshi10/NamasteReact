@@ -1,4 +1,11 @@
-body{
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* add the @tailwind directives for each of Tailwind’s layers. */
+
+
+/* body{
     margin: 0px;
     font-family: cursive;
 
@@ -43,8 +50,10 @@ body{
     padding-top: 10px;
     justify-content: flex-start;
 }
+*/
 
 /** SEARCH BAR **/
+/*
 .search-container{
     text-align: end;
     margin: 5px 10px 15px 0px;
@@ -73,10 +82,12 @@ body{
     box-shadow: none;
     outline: none;
 }
+*/
 /** SEARCH BAR CSS END **/
 
 
 /** RESTAURANT CARD **/
+/*
 .card{
     border: 1px solid #bcc1c7;
     border-radius: 2px;
@@ -123,9 +134,11 @@ body{
     font-size: 13px;
     border-radius: 2px;
 }
+*/
 /** RESTAURANT CARD CSS END **/
 
 /** SHIMMER CSS **/
+/*
 .shimmer-card{
     margin: 10px;
     height: 300px;
@@ -154,7 +167,4 @@ body{
 		background-position: 450px 0px;
 	}
 }
-
-
-
-
+ */

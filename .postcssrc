@@ -1,0 +1,7 @@
+{    
+  "plugins": {
+    "tailwindcss": {
+        // this indicates the pracle (our bundler) that will you are buundling up, we will use tailwindcss so compile that up
+    }
+  }
+}

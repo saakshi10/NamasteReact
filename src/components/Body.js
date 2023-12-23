@@ -74,12 +74,12 @@ const Body = () => {
     return allRestaurants.length === 0 ? (
         <Shimmer />
     ) : (
-        <div className="home-page">
-            <div className="search-container">
+        <div className="bg-pink-50">
+            <div className="search-container p-5 my-4">
                 <input
                     type="text"
                     placeholder="Search for restaurant"
-                    className="search-bar"
+                    className="search-bar rounded-tl-lg rounded-bl-lg border w-4/5 p-2"
                     value={searchText}
                     onChange={(e) => {
                         setSearchText(e.target.value);
@@ -89,14 +89,14 @@ const Body = () => {
                     }}
                 />
                 <i
-                    className="fa-solid fa-magnifying-glass search-icon"
+                    className="fa-solid fa-magnifying-glass search-icon rounded-tr-lg rounded-br-lg border w-1/12 p-3 text-center bg-blue-800 text-white hover:bg-blue-600"
                     onClick={() => {
                         const data = filterData(searchText);
                         setFilteredRestaurants(data);
                     }}
                 ></i>
             </div>
-            <div className="restaurant-list">
+            <div className="restaurant-list flex flex-wrap justify-start">
                 {filteredRestaurants.length === 0 ? (
                     <h1>No Restaurants</h1>
                 ) : (

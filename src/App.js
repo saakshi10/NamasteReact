@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -10,21 +10,38 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import LoginForm from "./components/LoginForm";
 import ProfileClass from "./components/ProfileClass";
 import Shimmer from "./components/Shimmer";
+import UserContext from "./utils/UserContext";
 
 // ALL lazy loaded components should be decared outside the Functional Componenet
-const Instamart = lazy(() => import("./components/instamart"));
+const Instamart = lazy(() => import("./components/Instamart"));
 const About = lazy(() => import("./components/About"));
 
 const AppLayout = () => {
+    const [user, setUser] = useState({
+        name: "Saakshi Singhal",
+        email: "saakshi@gmail.com",
+    });
+
     return (
         <>
-            <Header />
-            {/* <Body />                // if path is /
-            <AboutComponent />      // if path is /about
-            <ContactComponent />    // if path is /contact */}
-            {/* to do conditional rendering based on router use - Outlet component by react-router-dom */}
-            <Outlet />
-            <Footer />
+            {/* context can be changed for a smaller sectoion of app */}
+            <UserContext.Provider
+                value={{
+                    user: user,
+                    setUser,
+                }}
+            >
+                {/*
+                    <Body />                // if path is /
+                    <AboutComponent />      // if path is /about
+                    <ContactComponent />    // if path is /contact 
+                */}
+                <Header />
+
+                {/* to do conditional rendering based on router use - Outlet component by react-router-dom */}
+                <Outlet />
+                <Footer />
+            </UserContext.Provider>
         </>
     );
 };

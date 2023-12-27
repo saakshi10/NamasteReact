@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../config";
+import UserContext from "../utils/UserContext";
 import useRestaurant from "../utils/useRestaurant";
 import Shimmer from "./Shimmer";
 
@@ -8,19 +9,24 @@ const RestaurantMenu = (props) => {
     const params = useParams();
     const { id } = params;
 
+    const { user } = useContext(UserContext);
+
     // custom hook - this hook is handling fetching and mapping of restaurant details
     const { restaurantDetails, restaurantMenu } = useRestaurant(id);
 
     return (
         <div>
-            <div>
+            <h1 className="font-bold italic m-2">
+                Hi, {user.name}, what would you like to eat
+            </h1>
+            <div className="border-2 m-2 p-3 rounded-md">
                 <h1>Restaurant id: {id}</h1>
                 <h2>{restaurantDetails.name}</h2>
                 <img src={IMG_CDN_URL + restaurantDetails.cloudinaryImageId} />
                 <h5>{restaurantDetails.areaName}</h5>
             </div>
 
-            <div className="menu">
+            <div className="menu border-2 m-2 p-3 rounded-md">
                 <h3>Menu: </h3>
                 {restaurantMenu?.length <= 0 ? (
                     <Shimmer />

@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+
 import { Link } from "react-router-dom";
 import { restaurantList } from "../config";
 import useOnline from "../utils/useOnline";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
+import UserContext from "../utils/UserContext";
 
 // rerender of component happens when the state variables or the props passed to componenet changes
 const Body = () => {
     const [searchText, setSearchText] = useState("");
     const [filteredRestaurants, setFilteredRestaurants] = useState([]);
     const [allRestaurants, setAllRestaurants] = useState([]);
+
+    const { user, setUser } = useContext(UserContext);
 
     // in the below example, restaurants is mapped with const list from config file, when the page is rendered we see old data of restaurants and then gets replaced by new data
     useEffect(() => {
@@ -96,6 +100,19 @@ const Body = () => {
                     }}
                 ></i>
             </div>
+
+            <div className="search-container p-5 my-4">
+                <input
+                    type="text"
+                    placeholder="Change user context"
+                    className="search-bar rounded-tl-lg rounded-bl-lg border w-4/5 p-2"
+                    value={user.name}
+                    onChange={(e) => {
+                        setUser({ ...user, name: e.target.value });
+                    }}
+                />
+            </div>
+
             <div className="restaurant-list flex flex-wrap justify-start">
                 {filteredRestaurants.length === 0 ? (
                     <h1>No Restaurants</h1>

@@ -3,7 +3,7 @@
 // this file could be different for production or staging or testing
 
 export const IMG_CDN_URL =
-    "https://b.zmtcdn.com/web_assets/81f3ff974d82520780078ba1cfbd453a1583259680.png";
+    "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/";
 
 export const FETCH_MENU_URL =
     "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.901701231620061&lng=77.66445640618197&restaurantId=";

@@ -8,13 +8,16 @@ import ErrorComponent from "./components/Error";
 import ContactComponent from "./components/contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import LoginForm from "./components/LoginForm";
-import ProfileClass from "./components/ProfileClass";
+import ProfileClass from "./components/About/ProfileClass";
 import Shimmer from "./components/Shimmer";
+import CartComponent from "./components/Cart";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import store from "./utils/store/store";
 
 // ALL lazy loaded components should be decared outside the Functional Componenet
 const Instamart = lazy(() => import("./components/Instamart"));
-const About = lazy(() => import("./components/About"));
+const About = lazy(() => import("./components/About/About"));
 
 const AppLayout = () => {
     const [user, setUser] = useState({
@@ -23,7 +26,7 @@ const AppLayout = () => {
     });
 
     return (
-        <>
+        <Provider store={store}>
             {/* context can be changed for a smaller sectoion of app */}
             <UserContext.Provider
                 value={{
@@ -42,7 +45,7 @@ const AppLayout = () => {
                 <Outlet />
                 <Footer />
             </UserContext.Provider>
-        </>
+        </Provider>
     );
 };
 
@@ -79,6 +82,10 @@ const nestedAppRouter = createBrowserRouter([
                         <Instamart />
                     </Suspense>
                 ),
+            },
+            {
+                path: "/cart",
+                element: <CartComponent />,
             },
         ],
     },

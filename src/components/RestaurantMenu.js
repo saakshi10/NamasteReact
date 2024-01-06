@@ -34,10 +34,14 @@ const RestaurantMenu = (props) => {
         <div>
             <h1 className="font-bold italic m-2">
                 Hi, {user.name}, what would you like to eat
+                {restaurantMenu.length} items in the menu
             </h1>
 
             <div className="flex">
-                <div className="border-2 m-2 p-3 rounded-md">
+                <div
+                    className="border-2 m-2 p-3 rounded-md"
+                    data-testid="restaurant-info"
+                >
                     <h1>Restaurant id: {id}</h1>
                     <h2>{restaurantDetails.name}</h2>
                     <img
@@ -53,6 +57,7 @@ const RestaurantMenu = (props) => {
                         restaurantMenu.map((menuItem) => {
                             return (
                                 <ul
+                                    data-testid="menu-list"
                                     className="category-title"
                                     key={"menu-" + menuItem.title}
                                 >
@@ -78,6 +83,7 @@ const RestaurantMenu = (props) => {
                                                             }
                                                         </span>
                                                         <button
+                                                            data-testid="addBtn"
                                                             className="bg-green-700 text-white p-2 px-4 rounded-md"
                                                             onClick={() =>
                                                                 handleAddItem(

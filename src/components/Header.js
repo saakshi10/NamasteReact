@@ -3,11 +3,17 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../assets/img/logo.jpg";
 import UserContext from "../utils/UserContext";
+import useOnline from "../utils/useOnline";
 
 export const Title = () => {
     return (
         <a href="/">
-            <img className="h-28 p-2" src={logo} alt="Logo" />
+            <img
+                data-testid="logo"
+                className="h-28 p-2"
+                src={logo}
+                alt="Logo"
+            />
         </a>
     );
 };
@@ -20,7 +26,7 @@ function isLoggedIn() {
 
 const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+    const isOnline = useOnline();
     const { user } = useContext(UserContext);
 
     const cartItems = useSelector((store) => store.cart.items);
@@ -43,12 +49,17 @@ const Header = () => {
                         <Link to="/instamart">Instamart</Link>
                     </li>
                     <li className="px-4 font-bold">
-                        <Link to="/cart">Cart</Link>Cart - {cartItems.length}
+                        <Link to="/cart" data-testid="cart-items">
+                            Cart - {cartItems.length}
+                        </Link>
                     </li>
                 </ul>
             </div>
 
             <div>
+                <h1 data-testid="online-status">
+                    {isOnline ? "Online" : "Offline"}
+                </h1>
                 <h2 className="p-2 font-bold">{user.name}</h2>
                 {isLoggedIn ? (
                     <button id="login-btn" onClick={() => setIsLoggedIn(false)}>

@@ -82,6 +82,7 @@ const Body = () => {
             <div className="search-container p-5 my-4">
                 <input
                     type="text"
+                    data-testid="search-input"
                     placeholder="Search for restaurant"
                     className="search-bar rounded-tl-lg rounded-bl-lg border w-4/5 p-2"
                     value={searchText}
@@ -93,6 +94,7 @@ const Body = () => {
                     }}
                 />
                 <i
+                    data-testid="search-btn"
                     className="fa-solid fa-magnifying-glass search-icon rounded-tr-lg rounded-br-lg border w-1/12 p-3 text-center bg-blue-800 text-white hover:bg-blue-600"
                     onClick={() => {
                         const data = filterData(searchText);
@@ -113,7 +115,10 @@ const Body = () => {
                 />
             </div>
 
-            <div className="restaurant-list flex flex-wrap justify-start">
+            <div
+                className="restaurant-list flex flex-wrap justify-start"
+                data-testid="restaurant-list"
+            >
                 {filteredRestaurants.length === 0 ? (
                     <h1>No Restaurants</h1>
                 ) : (
